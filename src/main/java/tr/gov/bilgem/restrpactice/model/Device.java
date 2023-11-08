@@ -36,4 +36,9 @@ public class Device {
 	//Nullable
 	private User owner;
 	
+	/**
+	 * Device responds to PING (ICMP echo) requests or not.
+	 */
+	private Boolean accessible;
+	
 }
