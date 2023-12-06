@@ -18,7 +18,6 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(Main.class, args);
 		
-		System.in.read();
 	}
 
 }
