@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-    <statusListener
-            class="ch.qos.logback.core.status.NopStatusListener"/>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
 
     <property name="LOG_DIR" value="./log"/>
 
-    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/application.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="tr.gov.bilgem.restpractice.config.analyzer.PortInUseFailureAnalyzer" level="ERROR"/>
+
+    <logger name="org.springframework" level="OFF"/>
+    <logger name="org.apache" level="OFF"/>
+    <logger name="org.hibernate" level="OFF"/>
+    <logger name="org.jboss" level="OFF"/>
+    <logger name="org.tomcat" level="OFF"/>
+    <logger name="org.eclipse.jetty" level="OFF"/>
+    <logger name="tr.gov.bilgem.restpractice.Main" level="OFF"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="FILE"/> -->
+    </root>
 </configuration>
