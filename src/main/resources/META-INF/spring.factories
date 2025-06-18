@@ -1,0 +1,5 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+tr.gov.bilgem.restpractice.config.analyzer.ProjectFailureAnalyzer, tr.gov.bilgem.restpractice.failure.DBConnectionFailureAnalyzer
+
+org.springframework.boot.diagnostics.FailureAnalysisReporter=\
+tr.gov.bilgem.restpractice.config.analyzer.FailureReporter

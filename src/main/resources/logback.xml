@@ -1,36 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
-
-    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
-
-    <property name="LOG_DIR" value="./log"/>
-
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<configuration>
+    <appender name="APPLICATION_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/application.log</file>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/application-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="ACCESS_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/access.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/access.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_DIR}/application.log</file>
-        <append>true</append>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
 
-    <logger name="tr.gov.bilgem.restpractice.config.analyzer.PortInUseFailureAnalyzer" level="ERROR"/>
+    <logger name="tr.gov.bilgem.restpractice.config.ApplicationEventListener" level="INFO">
+        <appender-ref ref="APPLICATION_LOG_FILE" />
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.config.RequestLoggingInterceptor" level="INFO">
+        <appender-ref ref="ACCESS_LOG_FILE" />
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.failure.FailureReporter" level="FATAL">
+        <appender-ref ref="APPLICATION_LOG_FILE" />
+    </logger>
 
-    <logger name="org.springframework" level="OFF"/>
-    <logger name="org.apache" level="OFF"/>
-    <logger name="org.hibernate" level="OFF"/>
-    <logger name="org.jboss" level="OFF"/>
-    <logger name="org.tomcat" level="OFF"/>
-    <logger name="org.eclipse.jetty" level="OFF"/>
-    <logger name="tr.gov.bilgem.restpractice.Main" level="OFF"/>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-        <!-- <appender-ref ref="FILE"/> -->
+    <root level="debug">
+        <appender-ref ref="APPLICATION_LOG_FILE" />
     </root>
 </configuration>
