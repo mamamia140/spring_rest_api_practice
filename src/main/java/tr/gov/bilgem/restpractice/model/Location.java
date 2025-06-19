@@ -1,5 +1,13 @@
 package tr.gov.bilgem.restpractice.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * Represents device location.
  *
@@ -7,24 +15,36 @@ package tr.gov.bilgem.restpractice.model;
  * @date Nov 3, 2023
  * @since 1.0.0
  */
-//@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name = "locations")
 public class Location {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	//Not blank
-	//Max 50
+
+	@Size(max = 50)
+	@NotBlank
+	@Column
 	private String city;
-	
-	//Not blank
-	//Max 50
+
+	@NotBlank
+	@Size(max = 50)
+	@Column
 	private String county;
-	
-	//Not blank
-	//Max 50
+
+	@Size(max = 50)
+	@NotBlank
+	@Column
 	private String country;
-	
+
+	@Column
 	private Double longitude;
-	
+
+	@Column
 	private Double altitude;
+
+	@Version
+	private int version;
 }

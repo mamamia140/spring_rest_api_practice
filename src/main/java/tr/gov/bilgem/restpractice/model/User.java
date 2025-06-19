@@ -1,5 +1,11 @@
 package tr.gov.bilgem.restpractice.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+
 /**
  * Represents application (API) user account.
  *
@@ -7,32 +13,44 @@ package tr.gov.bilgem.restpractice.model;
  * @date Nov 3, 2023
  * @since 1.0.0
  */
-//@Entity
-class User {
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name = "users")
+public class User {
 
 	public enum Role {
 		ADMIN, OPERATOR, OBSERVER
 	}
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	// Not blank
-	// Unique
-	// Max 50
+
+	@NotBlank
+	@Size(max=50)
+	@Column(nullable = false, unique = true, length = 50)
 	private String username;
 
-	// Not blank
-	// Unique
-	// Email
-	// Max 50
+
+	@NotBlank
+	@Size(max=50)
+	@Email
+	@Column(nullable = false, unique = true, length = 50)
 	private String email;
 
-	// Not blank
-	// Min 6
-	// Max 50
+
+	@NotBlank
+	@Size(min = 6, max = 50)
+	@Column(nullable = false, length = 50)
 	private String password;
 
-	// Not null
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	@Version
+	private int version;
 
 }

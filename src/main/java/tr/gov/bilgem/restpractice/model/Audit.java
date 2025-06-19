@@ -1,7 +1,12 @@
 package tr.gov.bilgem.restpractice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -12,24 +17,32 @@ import java.time.Instant;
  * @date Nov 3, 2023
  * @since 1.0.0
  */
-@Entity
-@Table
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity(name = "audits")
 public class Audit {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	//Not null
+
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
-	//Not blank
-	//Max 50
-	private String action;	//action description
-	
-	//Not null
-	//IPPv4
+
+	@NotBlank
+	@Size(max = 50)
+	@Column(nullable = false, length = 50)
+	private String action;
+
+	@Column(nullable = false)
+	@Pattern(regexp = "^((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)$")
 	private String clientIpAddress;
-	
-	//Not null
+
+	@Column(nullable = false)
 	private Instant timestamp;
-	
+
+	@Version
+	private int version;
+
 }
