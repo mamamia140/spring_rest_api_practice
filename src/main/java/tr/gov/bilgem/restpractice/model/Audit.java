@@ -1,5 +1,8 @@
 package tr.gov.bilgem.restpractice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.Instant;
 
 /**
@@ -9,7 +12,8 @@ import java.time.Instant;
  * @date Nov 3, 2023
  * @since 1.0.0
  */
-//@Entity
+@Entity
+@Table
 public class Audit {
 	
 	private Long id;
