@@ -1,5 +1,8 @@
 package tr.gov.bilgem.restpractice.user;
 
-class UserService {
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserService {
 
 }

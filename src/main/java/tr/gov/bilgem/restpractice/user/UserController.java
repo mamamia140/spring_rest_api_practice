@@ -1,5 +1,8 @@
 package tr.gov.bilgem.restpractice.user;
 
-class UserController {
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserController {
 
 }

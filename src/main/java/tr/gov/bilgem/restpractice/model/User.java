@@ -16,8 +16,16 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "users")
 public class User {
+
+	public User(String username, String email, String password, Role role) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
 
 	public enum Role {
 		ADMIN, OPERATOR, OBSERVER
