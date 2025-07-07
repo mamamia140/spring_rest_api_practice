@@ -12,7 +12,7 @@ class BuildInfo {
 
 	private String time; 			// dd.MM.yyyy HH:mm
 	private String branch;			//master
-	private String ccommitId; 		// ID of the commit
+	private String commitId; 		// ID of the commit
 	private String version;			// application version (pom.xml)
 }
 

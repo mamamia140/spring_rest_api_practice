@@ -1,5 +1,6 @@
 package tr.gov.bilgem.restpractice.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 
 /**
  * Provides the "/api/build-info" end-point.
@@ -27,7 +30,11 @@ class BuildInfoController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	BuildInfo get() {
 		LOGGER.debug("Getting build-info...");
-		return buildInfoService.get();
+		try {
+			return buildInfoService.get();
+		} catch (IOException e) {
+			return null;
+		}
 	}
 
 }

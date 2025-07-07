@@ -56,7 +56,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.32</version> <!-- latest as of 2025 -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
@@ -116,12 +117,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
