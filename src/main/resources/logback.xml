@@ -30,6 +30,9 @@
     <logger name="tr.gov.bilgem.restpractice.failure.FailureReporter" level="FATAL">
         <appender-ref ref="APPLICATION_LOG_FILE" />
     </logger>
+    <logger name="tr.gov.bilgem.restpractice.config.ApiLoggingFilter" level="INFO">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
 
 
     <root level="debug">
