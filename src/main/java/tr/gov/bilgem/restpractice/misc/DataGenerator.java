@@ -31,6 +31,15 @@ public class DataGenerator {
 
     @PostConstruct
     public void seed() {
+
+        if (userRepository.count() > 0 &&
+                groupRepository.count() > 0 &&
+                locationRepository.count() > 0 &&
+                deviceRepository.count() > 0) {
+            System.out.println("Database already populated. Skipping data generation.");
+            return;
+        }
+
         seedUsers();
         seedGroups();
         seedLocations();
