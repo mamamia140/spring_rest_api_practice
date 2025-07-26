@@ -67,8 +67,8 @@ public class DataGenerator {
         for (int i = 0; i < 5; i++) {
             Location location = new Location();
             location.setCity(faker.address().city());
-            location.setCounty("Yenişehir");
-            location.setCounty(faker.address().country());
+            location.setCounty("Yenisehir");
+            location.setCountry(faker.address().country());
             location.setLongitude(random.nextDouble() * 360 - 180);
             location.setAltitude(random.nextDouble() * 1000);
             locationRepository.save(location);

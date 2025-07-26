@@ -61,6 +61,17 @@ public abstract class AbstractService<T, ID> {
         return true;
     }
 
+    public void updateById(ID id, T entity) throws EntityNotFoundException {
+        Log logger = getServiceLoggerByEntity();
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Entity with id " + id + " not found");
+        }
+        repository.save(entity);
+        if(logger.isDebugEnabled()){
+            logger.debug("Updated entity with id: " + id);
+        }
+    }
+
     public abstract Log getServiceLoggerByEntity();
 
 }

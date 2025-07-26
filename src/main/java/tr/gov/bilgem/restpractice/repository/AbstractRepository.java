@@ -7,5 +7,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface AbstractRepository<T,ID> extends JpaRepository<T, ID> {
+
     Page<T> search(String keyword, Pageable pageable);
 }

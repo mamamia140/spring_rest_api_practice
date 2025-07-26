@@ -7,10 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import tr.gov.bilgem.restpractice.audit.AuditService;
 import tr.gov.bilgem.restpractice.service.AbstractService;
 
@@ -103,6 +100,18 @@ public abstract class AbstractController<T, ID> {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(String.format("Entity couldn't be deleted. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<String> updateEntityById(@PathVariable ID id, @RequestBody T entity) {
+        try{
+            entityService.updateById(id, entity);
+            return new ResponseEntity<>(String.format("Entity with id:%s updated successfully", id),HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(String.format("Entity couldn't be updated. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
