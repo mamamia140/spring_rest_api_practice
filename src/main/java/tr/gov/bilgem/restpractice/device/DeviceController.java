@@ -8,7 +8,10 @@ import tr.gov.bilgem.restpractice.controller.AbstractController;
 import tr.gov.bilgem.restpractice.model.Device;
 import tr.gov.bilgem.restpractice.service.AbstractService;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.root}/devices")
@@ -30,6 +33,31 @@ class DeviceController extends AbstractController<Device, Long> {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(String.format("Device couldn't be updated. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(path = "/{id}/ping")
+    public ResponseEntity<String> ping(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        try{
+            entityService.existsById(id);
+            Optional<Device> device = entityService.findById(id);
+            String address = device.get().getIpAddress();
+            if (address == null || address.isBlank()) {
+                return ResponseEntity.badRequest().body("Address is null");
+            }
+
+
+            String ttl = body.getOrDefault("ttl", "128");
+            String timeout = body.getOrDefault("timeout", "1000");
+            String size = body.getOrDefault("size", "32");
+            String count = body.getOrDefault("count", "4");
+
+            String response = ((DeviceService) entityService).ping(address, ttl, timeout, size, count);
+            return ResponseEntity.ok(response);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body("Device not found with id " + id);
+        } catch (IOException e) {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ping failed: " + e.getMessage());
         }
     }
 

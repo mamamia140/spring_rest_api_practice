@@ -28,5 +28,4 @@ class AuditController extends AbstractController<Audit, Long> {
         }
 
     }
-
 }

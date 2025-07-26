@@ -2,9 +2,14 @@ package tr.gov.bilgem.restpractice.device;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import tr.gov.bilgem.restpractice.model.Device;
 import tr.gov.bilgem.restpractice.service.AbstractService;
+
+import java.io.IOException;
+import java.util.List;
 
 @Component
 class DeviceService extends AbstractService<Device, Long> {
@@ -28,4 +33,19 @@ class DeviceService extends AbstractService<Device, Long> {
         }
     }
 
+    public String ping(String address, String ttl, String timeout, String size, String count) throws IOException {
+        List<String> command = List.of(
+                "ping",
+                "-i", ttl,
+                "-w", timeout,
+                "-l", size,
+                "-n", count,
+                address
+        );
+
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        Process process = processBuilder.start();
+        String output = new String(process.getInputStream().readAllBytes());
+        return output;
+    }
 }
