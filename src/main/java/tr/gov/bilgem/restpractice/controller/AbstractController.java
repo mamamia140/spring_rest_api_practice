@@ -2,7 +2,6 @@ package tr.gov.bilgem.restpractice.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,7 @@ public abstract class AbstractController<T, ID> {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<T> getEntityById(@PathVariable ID id) {
-        Optional<T> entity = entityService.getById(id);
+        Optional<T> entity = entityService.findById(id);
         return entity
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

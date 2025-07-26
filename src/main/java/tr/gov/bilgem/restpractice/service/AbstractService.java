@@ -26,7 +26,7 @@ public abstract class AbstractService<T, ID> {
         return repository.findAll(pageable);
     }
 
-    public Optional<T> getById(ID id) {
+    public Optional<T> findById(ID id) {
         return repository.findById(id);
     }
 
@@ -51,6 +51,14 @@ public abstract class AbstractService<T, ID> {
         if(logger.isDebugEnabled()){
             logger.debug("Deleted entity with id: " + id);
         }
+    }
+
+    public boolean existsById(ID id) throws EntityNotFoundException {
+        boolean exists = repository.existsById(id);
+        if (!exists){
+            throw new EntityNotFoundException("Entity with id " + id + " not found");
+        }
+        return true;
     }
 
     public abstract Log getServiceLoggerByEntity();

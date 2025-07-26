@@ -19,4 +19,13 @@ class DeviceService extends AbstractService<Device, Long> {
     public Log getServiceLoggerByEntity() {
         return logger;
     }
+
+    public void updateNameById(Long id, String name) {
+        Log logger = getServiceLoggerByEntity();
+        ((DeviceRepository) repository).updateNameById(id, name);
+        if(logger.isDebugEnabled()){
+            logger.debug("Updated name of the device with id: " + id + ". New name: " + name);
+        }
+    }
+
 }
