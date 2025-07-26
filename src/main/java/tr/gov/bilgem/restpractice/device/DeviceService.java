@@ -48,4 +48,12 @@ class DeviceService extends AbstractService<Device, Long> {
         String output = new String(process.getInputStream().readAllBytes());
         return output;
     }
+
+    public void bulkDelete(List<Long> ids) {
+        Log logger = getServiceLoggerByEntity();
+        ((DeviceRepository) repository).deleteAllById(ids);
+        if(logger.isDebugEnabled()){
+            logger.debug("Deleted " + ids.size() + " device(s)");
+        }
+    }
 }

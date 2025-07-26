@@ -9,6 +9,7 @@ import tr.gov.bilgem.restpractice.model.Device;
 import tr.gov.bilgem.restpractice.service.AbstractService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,6 +60,17 @@ class DeviceController extends AbstractController<Device, Long> {
         } catch (IOException e) {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ping failed: " + e.getMessage());
         }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> bulkDelete(@RequestBody Map<String, String> body) {
+        String ids = body.get("devices");
+        List<Long> idList = new ArrayList<>();
+        for (String id : ids.split(",")) {
+            idList.add(Long.parseLong(id));
+        }
+        ((DeviceService) entityService).bulkDelete(idList);
+        return new ResponseEntity<>("Bulk deleted devices", HttpStatus.OK);
     }
 
 }

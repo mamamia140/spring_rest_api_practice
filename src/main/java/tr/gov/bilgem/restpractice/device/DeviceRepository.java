@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import tr.gov.bilgem.restpractice.model.Device;
 import tr.gov.bilgem.restpractice.repository.AbstractRepository;
 
+import java.util.List;
+
 @Repository
 public interface DeviceRepository extends AbstractRepository<Device, Long> {
     @Override
@@ -23,5 +25,10 @@ public interface DeviceRepository extends AbstractRepository<Device, Long> {
     @Transactional
     @Query("UPDATE devices d SET d.name = :name WHERE d.id = :id")
     void updateNameById(@Param("id") Long id, @Param("name") String name);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM devices d WHERE d.id IN :ids")
+    void deleteAllById(List<Long> ids);
 
 }
