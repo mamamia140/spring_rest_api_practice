@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User {
+public class User extends BaseEntity {
 
 	public User(String username, String email, String password, Role role) {
 		this.username = username;
@@ -35,16 +35,11 @@ public class User {
 	public enum Role {
 		ADMIN, OPERATOR, OBSERVER
 	}
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-
 
 	@NotBlank
 	@Size(max=50)
 	@Column(nullable = false, unique = true, length = 50)
 	private String username;
-
 
 	@NotBlank
 	@Size(max=50)
@@ -52,19 +47,14 @@ public class User {
 	@Column(nullable = false, unique = true, length = 50)
 	private String email;
 
-
 	@NotBlank
 	@Size(min = 6, max = 50)
 	@Column(nullable = false, length = 50)
 	private String password;
 
-
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-
-	@Version
-	private int version;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Audit> audits = new ArrayList<>();

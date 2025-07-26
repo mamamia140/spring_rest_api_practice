@@ -74,11 +74,12 @@ public abstract class AbstractService<T, ID> {
 
     public abstract Log getServiceLoggerByEntity();
 
-    public void create(T entity) {
+    public T create(T entity) {
         Log logger = getServiceLoggerByEntity();
-        repository.save(entity);
+        T createdEntity = repository.save(entity);
         if(logger.isDebugEnabled()){
             logger.debug("A new entity has been created");
         }
+        return createdEntity;
     }
 }

@@ -19,10 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity(name = "locations")
-public class Location {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+public class Location extends BaseEntity{
 
 	@Size(max = 50)
 	@NotBlank
@@ -45,6 +42,4 @@ public class Location {
 	@Column
 	private Double altitude;
 
-	@Version
-	private int version;
 }

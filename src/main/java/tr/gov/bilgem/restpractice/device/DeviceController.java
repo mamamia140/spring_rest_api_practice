@@ -26,11 +26,16 @@ class DeviceController extends AbstractController<Device, Long> {
     public ResponseEntity<String> updateName(@PathVariable Long id, @RequestBody Map<String, String> body) {
         try{
             entityService.existsById(id);
+            if(body.get("name") == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             String name = body.get("name");
             ((DeviceService) entityService).updateNameById(id,name);
             return new ResponseEntity<>(String.format("Updated name of the device id with:%s successfully", id),HttpStatus.OK);
         }
         catch (EntityNotFoundException e) {
+            entityService.getServiceLoggerByEntity().error(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(String.format("Device couldn't be updated. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,6 +70,9 @@ class DeviceController extends AbstractController<Device, Long> {
     @DeleteMapping
     public ResponseEntity<String> bulkDelete(@RequestBody Map<String, String> body) {
         String ids = body.get("devices");
+        if(ids == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         List<Long> idList = new ArrayList<>();
         for (String id : ids.split(",")) {
             idList.add(Long.parseLong(id));

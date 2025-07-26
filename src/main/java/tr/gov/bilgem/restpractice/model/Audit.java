@@ -21,10 +21,7 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 @Entity(name = "audits")
-public class Audit {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+public class Audit extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
@@ -41,8 +38,4 @@ public class Audit {
 
 	@Column(nullable = false)
 	private Instant timestamp;
-
-	@Version
-	private int version;
-
 }

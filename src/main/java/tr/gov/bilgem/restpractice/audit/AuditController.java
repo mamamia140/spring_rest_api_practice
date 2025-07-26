@@ -24,6 +24,8 @@ class AuditController extends AbstractController<Audit, Long> {
             ((AuditService) entityService).delete(time);
             return new ResponseEntity<>("Deleted audit records", HttpStatus.OK);
         } catch (Exception e) {
+            entityService.getServiceLoggerByEntity().error(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>("Couldn't delete audit records", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

@@ -2,6 +2,7 @@ package tr.gov.bilgem.restpractice.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,13 +10,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.gov.bilgem.restpractice.audit.AuditService;
+import tr.gov.bilgem.restpractice.model.BaseEntity;
 import tr.gov.bilgem.restpractice.service.AbstractService;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractController<T, ID> {
+public abstract class AbstractController<T extends BaseEntity, ID> {
 
     public AbstractService<T, ID> entityService;
 
@@ -99,6 +102,8 @@ public abstract class AbstractController<T, ID> {
         catch (EntityNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
+            entityService.getServiceLoggerByEntity().error(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(String.format("Entity couldn't be deleted. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -110,14 +115,24 @@ public abstract class AbstractController<T, ID> {
             return new ResponseEntity<>(String.format("Entity with id:%s updated successfully", id),HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (DataIntegrityViolationException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
+            entityService.getServiceLoggerByEntity().error(e.getMessage());
+            e.printStackTrace();
             return new ResponseEntity<>(String.format("Entity couldn't be updated. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping
-    public ResponseEntity<String> createEntity(@RequestBody T entity) {
-        entityService.create(entity);
-        return new ResponseEntity<>("Entity has been created successfully",HttpStatus.OK);
+    public ResponseEntity<Void> createEntity(@RequestBody T entity, HttpServletRequest request) {
+        try{
+            T createdEntity = entityService.create(entity);
+            String baseUrl = request.getRequestURL().toString();
+            URI location = URI.create(baseUrl + "/" + createdEntity.getId());
+            return ResponseEntity.created(location).build();
+        } catch (DataIntegrityViolationException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

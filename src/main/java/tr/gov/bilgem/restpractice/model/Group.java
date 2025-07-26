@@ -17,11 +17,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Entity(name = "groups")
-public class Group {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+public class Group extends BaseEntity {
 
 	@NotBlank
 	@Size( max = 50)
@@ -32,6 +28,4 @@ public class Group {
 	@Column
 	private String description;
 
-	@Version
-	private int version;
 }

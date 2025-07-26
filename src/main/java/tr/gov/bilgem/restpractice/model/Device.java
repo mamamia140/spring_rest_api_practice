@@ -20,10 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity(name = "devices")
-public class Device {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+public class Device extends BaseEntity {
 
 	@NotBlank
 	@Size(max = 50)
@@ -61,8 +58,5 @@ public class Device {
 	 */
 	@Column
 	private Boolean accessible;
-
-	@Version
-	private int version;
 
 }
