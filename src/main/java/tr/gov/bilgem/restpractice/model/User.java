@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents application (API) user account.
  *
@@ -62,5 +65,11 @@ public class User {
 
 	@Version
 	private int version;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Audit> audits = new ArrayList<>();
+
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Device> devices = new ArrayList<>();
 
 }

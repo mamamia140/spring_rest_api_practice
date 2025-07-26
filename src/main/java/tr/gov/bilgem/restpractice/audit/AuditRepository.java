@@ -1,7 +1,9 @@
 package tr.gov.bilgem.restpractice.audit;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import tr.gov.bilgem.restpractice.model.Audit;
@@ -22,4 +24,9 @@ public interface AuditRepository extends AbstractRepository<Audit, Long> {
         a.timestamp >= :start AND a.timestamp <= :end
     """)
     Page<Audit> search(@Param("q") String keyword, Pageable pageable, @Param("start") Instant start, @Param("end") Instant end);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM audits a WHERE a.user.id = :userId")
+    void deleteByUserId(@Param("userId") Long id);
 }

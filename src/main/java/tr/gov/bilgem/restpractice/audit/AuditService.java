@@ -1,5 +1,7 @@
 package tr.gov.bilgem.restpractice.audit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,8 @@ import java.time.Instant;
 @Service
 public class AuditService extends AbstractService<Audit, Long> {
 
+    private static final Log logger = LogFactory.getLog(AuditService.class);
+
     protected AuditService(AuditRepository auditRepository) {
         super(auditRepository);
     }
@@ -23,5 +27,10 @@ public class AuditService extends AbstractService<Audit, Long> {
                 Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
         return ((AuditRepository) repository).search(query, pageable, start, end);
+    }
+
+    @Override
+    public Log getServiceLoggerByEntity() {
+        return logger;
     }
 }

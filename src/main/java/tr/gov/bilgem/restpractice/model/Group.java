@@ -18,16 +18,15 @@ import lombok.*;
 @NoArgsConstructor
 @Entity(name = "groups")
 public class Group {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-
 
 	@NotBlank
 	@Size( max = 50)
 	@Column(unique = true)
 	private String name;
-
 
 	@Size(max = 200)
 	@Column

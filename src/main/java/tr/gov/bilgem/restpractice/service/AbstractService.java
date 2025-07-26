@@ -1,11 +1,12 @@
 package tr.gov.bilgem.restpractice.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import tr.gov.bilgem.restpractice.model.Audit;
 import tr.gov.bilgem.restpractice.repository.AbstractRepository;
+import org.apache.commons.logging.Log;
 
 import java.util.Optional;
 
@@ -36,5 +37,22 @@ public abstract class AbstractService<T, ID> {
         Pageable pageable = PageRequest.of(page, size, sort);
         return repository.search(query, pageable);
     }
+
+    public void deleteById(ID id) throws EntityNotFoundException {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Entity with id " + id + " not found");
+        }
+        deleteEntity(id);
+    }
+
+    public void deleteEntity(ID id){
+        Log logger = getServiceLoggerByEntity();
+        repository.deleteById(id);
+        if(logger.isDebugEnabled()){
+            logger.debug("Deleted entity with id: " + id);
+        }
+    }
+
+    public abstract Log getServiceLoggerByEntity();
 
 }

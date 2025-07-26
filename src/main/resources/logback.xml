@@ -33,6 +33,21 @@
     <logger name="tr.gov.bilgem.restpractice.config.ApiLoggingFilter" level="INFO">
         <appender-ref ref="APPLICATION_LOG_FILE"/>
     </logger>
+    <logger name="tr.gov.bilgem.restpractice.user.UserService" level="DEBUG">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.location.LocationService" level="DEBUG">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.group.GroupService" level="DEBUG">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.device.DeviceService" level="DEBUG">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.audit.AuditService" level="DEBUG">
+        <appender-ref ref="APPLICATION_LOG_FILE"/>
+    </logger>
 
 
     <root level="debug">
