@@ -114,4 +114,10 @@ public abstract class AbstractController<T, ID> {
             return new ResponseEntity<>(String.format("Entity couldn't be updated. Internal server error\n\nError:%s",e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping
+    public ResponseEntity<String> createEntity(@RequestBody T entity) {
+        entityService.create(entity);
+        return new ResponseEntity<>("Entity has been created successfully",HttpStatus.OK);
+    }
 }
