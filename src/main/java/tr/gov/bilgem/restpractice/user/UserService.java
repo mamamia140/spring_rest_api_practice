@@ -1,17 +1,22 @@
 package tr.gov.bilgem.restpractice.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import tr.gov.bilgem.restpractice.model.User;
+import tr.gov.bilgem.restpractice.service.AbstractService;
 
 import java.util.Optional;
 
-@Component
-public class UserService {
+@Service
+public class UserService extends AbstractService<User, Long> {
 
-    @Autowired
-    private UserRepository userRepository;
-    public Optional<User> getById(long id) {
-        return userRepository.findById(id);
+    protected UserService(UserRepository userRepository) {
+        super(userRepository);
     }
 }

@@ -1,19 +1,13 @@
 package tr.gov.bilgem.restpractice.device;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.gov.bilgem.restpractice.model.Device;
-
-import javax.swing.text.html.Option;
-import java.util.Optional;
+import tr.gov.bilgem.restpractice.service.AbstractService;
 
 @Component
-class DeviceService {
+class DeviceService extends AbstractService<Device, Long> {
 
-    @Autowired
-    private DeviceRepository deviceRepository;
-
-    public Optional<Device> getById(long id){
-        return deviceRepository.findById(id);
+    protected DeviceService(DeviceRepository deviceRepository) {
+        super(deviceRepository);
     }
 }

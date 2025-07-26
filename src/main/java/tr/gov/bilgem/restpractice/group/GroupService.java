@@ -1,18 +1,13 @@
 package tr.gov.bilgem.restpractice.group;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.gov.bilgem.restpractice.model.Group;
-
-import java.util.Optional;
+import tr.gov.bilgem.restpractice.service.AbstractService;
 
 @Component
-class GroupService {
+class GroupService extends AbstractService<Group, Long> {
 
-    @Autowired
-    private GroupRepository groupRepository;
-
-    public Optional<Group> getById(long id){
-        return groupRepository.findById(id);
+    protected GroupService(GroupRepository groupRepository) {
+        super(groupRepository);
     }
 }

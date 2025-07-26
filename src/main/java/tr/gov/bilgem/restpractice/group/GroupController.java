@@ -1,31 +1,35 @@
 package tr.gov.bilgem.restpractice.group;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tr.gov.bilgem.restpractice.controller.BaseController;
 import tr.gov.bilgem.restpractice.model.Group;
-import tr.gov.bilgem.restpractice.model.User;
+import tr.gov.bilgem.restpractice.service.AbstractService;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("${api.root}/groups")
-class GroupController {
+class GroupController extends BaseController<Group, Long> {
 
-    @Autowired
-    private GroupService groupService;
+    protected GroupController(AbstractService<Group, Long> groupService) {
+        super(groupService);
+    }
 
     @GetMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Group> getGroupById(@PathVariable long id) {
-        Optional<Group> group = groupService.getById(id);
-        if(group.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(group.get(),HttpStatus.OK);
+        return getEntityById(id);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Group>> getAllPaged(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String mode,
+            HttpServletRequest request) {
+        return getAllPagedEntity(page, size, sort, mode, request);
     }
 }
