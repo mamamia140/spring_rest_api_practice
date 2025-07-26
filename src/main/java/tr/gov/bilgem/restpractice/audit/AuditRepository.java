@@ -29,4 +29,9 @@ public interface AuditRepository extends AbstractRepository<Audit, Long> {
     @Transactional
     @Query("DELETE FROM audits a WHERE a.user.id = :userId")
     void deleteByUserId(@Param("userId") Long id);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM audits a WHERE a.timestamp <= :time")
+    void deleteByDate(Instant time);
 }

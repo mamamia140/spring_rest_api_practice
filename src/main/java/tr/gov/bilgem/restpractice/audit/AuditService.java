@@ -33,4 +33,12 @@ public class AuditService extends AbstractService<Audit, Long> {
     public Log getServiceLoggerByEntity() {
         return logger;
     }
+
+    public void delete(long time) {
+        Instant instant = Instant.ofEpochSecond(time);
+        ((AuditRepository) repository).deleteByDate(instant);
+        if(logger.isDebugEnabled()){
+            logger.debug("Deleted audit records before the date: " + instant);
+        }
+    }
 }
