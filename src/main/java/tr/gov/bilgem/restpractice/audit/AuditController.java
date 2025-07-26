@@ -1,5 +1,17 @@
 package tr.gov.bilgem.restpractice.audit;
 
-class AuditController {
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import tr.gov.bilgem.restpractice.controller.AbstractController;
+import tr.gov.bilgem.restpractice.model.Audit;
+import tr.gov.bilgem.restpractice.service.AbstractService;
+
+@RestController
+@RequestMapping("${api.root}/audits")
+class AuditController extends AbstractController<Audit, Long> {
+
+    protected AuditController(AbstractService<Audit, Long> auditService) {
+        super(auditService);
+    }
 
 }
