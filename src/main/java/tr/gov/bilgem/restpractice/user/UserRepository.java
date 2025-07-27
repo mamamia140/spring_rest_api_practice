@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import tr.gov.bilgem.restpractice.model.User;
 import tr.gov.bilgem.restpractice.repository.AbstractRepository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends AbstractRepository<User, Long> {
     @Override
@@ -16,5 +18,8 @@ public interface UserRepository extends AbstractRepository<User, Long> {
             "LOWER(u.email) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
             "LOWER(u.password) LIKE LOWER(CONCAT('%', :q, '%'))")
     Page<User> search(@Param("q") String keyword, Pageable pageable);
+
+    @Query("SELECT u FROM users u where u.username = :username")
+    Optional<User> findByUsername(@Param("username") String username);
 
 }
