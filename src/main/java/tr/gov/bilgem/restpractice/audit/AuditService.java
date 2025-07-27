@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tr.gov.bilgem.restpractice.model.Audit;
+import tr.gov.bilgem.restpractice.model.User;
 import tr.gov.bilgem.restpractice.service.AbstractService;
 
 import java.time.Instant;
@@ -39,6 +40,19 @@ public class AuditService extends AbstractService<Audit, Long> {
         ((AuditRepository) repository).deleteByDate(instant);
         if(logger.isDebugEnabled()){
             logger.debug("Deleted audit records before the date: " + instant);
+        }
+    }
+
+    public void logAudit(User user, String action, String ipAddress, Instant timeStamp) {
+        try {
+            Audit audit = new Audit(user, action, ipAddress, timeStamp);
+            repository.save(audit);
+
+            if (logger.isDebugEnabled()) {
+                logger.debug("Audit log created: " + action);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to create audit log: " + e.getMessage(), e);
         }
     }
 }

@@ -5,6 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import tr.gov.bilgem.restpractice.model.User;
 import tr.gov.bilgem.restpractice.repository.AbstractRepository;
 import org.apache.commons.logging.Log;
 
