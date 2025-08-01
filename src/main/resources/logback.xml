@@ -19,6 +19,66 @@
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
     </appender>
+    <appender name="USER_SERVICE_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/user_service.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/user_service.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="LOCATION_SERVICE_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/location_service.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/location_service.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="GROUP_SERVICE_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/group_service.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/group_service.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="DEVICE_SERVICE_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/device_service.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/device_service.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="AUDIT_SERVICE_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/audit_service.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/audit_service.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+    <appender name="DEVICE_WATCHER_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/device_watcher.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>archived_logs/device_watcher.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
 
 
     <logger name="tr.gov.bilgem.restpractice.config.ApplicationEventListener" level="INFO">
@@ -34,19 +94,22 @@
         <appender-ref ref="APPLICATION_LOG_FILE"/>
     </logger>
     <logger name="tr.gov.bilgem.restpractice.user.UserService" level="DEBUG">
-        <appender-ref ref="APPLICATION_LOG_FILE"/>
+        <appender-ref ref="USER_SERVICE_LOG_FILE"/>
     </logger>
     <logger name="tr.gov.bilgem.restpractice.location.LocationService" level="DEBUG">
-        <appender-ref ref="APPLICATION_LOG_FILE"/>
+        <appender-ref ref="LOCATION_SERVICE_LOG_FILE"/>
     </logger>
     <logger name="tr.gov.bilgem.restpractice.group.GroupService" level="DEBUG">
-        <appender-ref ref="APPLICATION_LOG_FILE"/>
+        <appender-ref ref="GROUP_SERVICE_LOG_FILE"/>
     </logger>
     <logger name="tr.gov.bilgem.restpractice.device.DeviceService" level="DEBUG">
-        <appender-ref ref="APPLICATION_LOG_FILE"/>
+        <appender-ref ref="DEVICE_SERVICE_LOG_FILE"/>
     </logger>
     <logger name="tr.gov.bilgem.restpractice.audit.AuditService" level="DEBUG">
-        <appender-ref ref="APPLICATION_LOG_FILE"/>
+        <appender-ref ref="AUDIT_SERVICE_LOG_FILE"/>
+    </logger>
+    <logger name="tr.gov.bilgem.restpractice.device.watcher.DeviceWatcherTask" level="DEBUG">
+        <appender-ref ref="DEVICE_WATCHER_LOG_FILE"/>
     </logger>
 
 

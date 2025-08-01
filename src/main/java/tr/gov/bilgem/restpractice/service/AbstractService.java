@@ -12,6 +12,7 @@ import tr.gov.bilgem.restpractice.model.User;
 import tr.gov.bilgem.restpractice.repository.AbstractRepository;
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractService<T, ID> {
@@ -85,5 +86,13 @@ public abstract class AbstractService<T, ID> {
             logger.debug("A new entity has been created");
         }
         return createdEntity;
+    }
+
+    public List<T> findAll(){
+        return repository.findAll();
+    }
+
+    public T update(T entity){
+        return repository.save(entity);
     }
 }

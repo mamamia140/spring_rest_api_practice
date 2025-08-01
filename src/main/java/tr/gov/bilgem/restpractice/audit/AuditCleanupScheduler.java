@@ -47,31 +47,4 @@ public class AuditCleanupScheduler {
             logger.error("Error during scheduled audit cleanup: " + e.getMessage(), e);
         }
     }
-
-    /**
-     * Manual cleanup method that can be called programmatically
-     */
-    public void performManualCleanup() {
-        logger.info("Performing manual audit cleanup...");
-        cleanupOldAuditRecords();
-    }
-
-    /**
-     * Cleanup with custom days parameter
-     */
-    public void cleanupOlderThan(int days) {
-        try {
-            logger.info(String.format("Starting manual audit cleanup for records older than %d days...", days));
-
-            Instant cutoffDate = Instant.now().minus(days, ChronoUnit.DAYS);
-            long cutoffEpochSecond = cutoffDate.getEpochSecond();
-
-            auditService.delete(cutoffEpochSecond);
-
-            logger.info(String.format("Manual audit cleanup completed. Deleted records older than %s", cutoffDate));
-
-        } catch (Exception e) {
-            logger.error("Error during manual audit cleanup: " + e.getMessage(), e);
-        }
-    }
 }
