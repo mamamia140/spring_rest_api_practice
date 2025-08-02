@@ -1,0 +1,862 @@
+{
+	"info": {
+		"_postman_id": "0223277b-e8e1-4559-88b9-726c254965f2",
+		"name": "rest-practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17295070"
+	},
+	"item": [
+		{
+			"name": "build-info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/build-info",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"build-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcGVyYXRvciIsImlhdCI6MTc1NDE1NDM5MiwiZXhwIjoxNzU0MTU3OTkyfQ.C7T2PKqgZM0qqQ98JTLX4QaRZOXIVzk76wVt6j7TUIu6YlPKYLE0dGwAaB_XzPKrwcozjNJHeo2pYViNGjjGxw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users/2",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeviceById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices/5",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGroupById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/groups/10",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"groups",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLocationById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/locations/1",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"locations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBulkDevices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices?page=2&size=5&sort=id,asc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBulkLocations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/locations?page=0&size=5&sort=id,asc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"locations"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBulkUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users?page=0&size=3&sort=id,asc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBulkUsersByQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users/search?q=140&page=0&size=3&sort=id,asc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "140"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "operator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "7k86d12g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/hello",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user paged content",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users?page=2&size=1&sort=username&mode=desc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "username"
+						},
+						{
+							"key": "mode",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device paged content",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcGVyYXRvciIsImlhdCI6MTc1NDE1NDM5MiwiZXhwIjoxNzU0MTU3OTkyfQ.C7T2PKqgZM0qqQ98JTLX4QaRZOXIVzk76wVt6j7TUIu6YlPKYLE0dGwAaB_XzPKrwcozjNJHeo2pYViNGjjGxw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices?page=0&size=2&sort=name&mode=desc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						},
+						{
+							"key": "sort",
+							"value": "name"
+						},
+						{
+							"key": "mode",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user paged search content",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users/search?q=com&page=0&size=10&sort=username&mode=desc",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "com"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "username"
+						},
+						{
+							"key": "mode",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "audits paged search content Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/audits/search?q=127&page=0&size=10&sort=id&mode=desc&start=1293830000&end=1293850000",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"audits",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "127"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "id"
+						},
+						{
+							"key": "mode",
+							"value": "desc"
+						},
+						{
+							"key": "start",
+							"value": "1293830000"
+						},
+						{
+							"key": "end",
+							"value": "1293850000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users/1",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bulk delete devices",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"devices\":\"8,9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete location by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/locations/1",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"locations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete device by Id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "operator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "7k86d12g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices/1000",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete audit records by date",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/audits?time=1699276235",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"audits"
+					],
+					"query": [
+						{
+							"key": "time",
+							"value": "1699276235"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rename device by Id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test-2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices/4/name",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						"4",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update device by Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"test-2\",\r\n    \"serialNo\": \"12345\",\r\n    \"ipAddress\": \"192.168.71.3\",\r\n    \"location\":\r\n    {\r\n        \"id\":5,\r\n        \"city\":\"Mersin\",\r\n        \"county\":\"Yenisehir\",\r\n        \"country\":\"Turkey\",\r\n        \"longitude\":\"39.310594180426705\",\r\n        \"altitude\":\"119.9018585224797\"\r\n    },\r\n    \"group\":\r\n    {\r\n        \"id\": 1,\r\n        \"name\": \"group-0\",\r\n        \"description\": \"Illum placeat similique maxime asperiores.\"\r\n    },\r\n    \"owner\":\r\n    {\r\n        \"id\":2,\r\n        \"username\":\"operator\",\r\n        \"email\":\"shaunna.okeefe@hotmail.com\",\r\n        \"password\":\"7k86d12g\",\r\n        \"role\":\"OPERATOR\"\r\n    },\r\n    \"accessible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices/4",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ttl\":\"128\",\r\n    \"timeout\":\"1000\",\r\n    \"size\":\"64\",\r\n    \"count\":\"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices/3/ping",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						"3",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"operator3\",\r\n    \"email\":\"shaunna2.oseefe@hotmail.com\",\r\n    \"password\":\"72112g\",\r\n    \"temp\":\"OPERATOR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/users",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a new device",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "7k86d12g",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "operator",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"createdDevisace\",\r\n    \"serialNo\": \"1312531\",\r\n    \"ipAddress\": \"192.168.0.100\",\r\n    \"location\":\r\n    {\r\n        \"id\":5,\r\n        \"city\":\"Mersin\",\r\n        \"county\":\"Yenisehir\",\r\n        \"country\":\"Turkey\",\r\n        \"longitude\":\"39.310594180426705\",\r\n        \"altitude\":\"119.9018585224797\"\r\n    },\r\n    \"group\":\r\n    {\r\n        \"id\": 1,\r\n        \"name\": \"group-0\",\r\n        \"description\": \"Illum placeat similique maxime asperiores.\"\r\n    },\r\n    \"owner\":\r\n    {\r\n        \"id\":2,\r\n        \"username\":\"operator\",\r\n        \"email\":\"shaunna.okeefe@hotmail.com\",\r\n        \"password\":\"7k86d12g\",\r\n        \"role\":\"OPERATOR\"\r\n    },\r\n    \"accessible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/devices",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get metrics",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "operator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "7k86d12g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/metrics",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "7k86d12g",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "operator",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/login",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcGVyYXRvciIsImlhdCI6MTc1NDE1NDYyOSwiZXhwIjoxNzU0MTU4MjI5fQ.wCww5TajPCgncjqMaEvW-l53kYzx4UGtXypIRG8q9OubfPhrRk86xSDSN-G_Fiwm8SbeT9m7IcBNBSO62UOgkQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{rest-practice-base-url}}/api/logout",
+					"host": [
+						"{{rest-practice-base-url}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "rest-practice-base-url",
+			"value": "https://localhost:8443",
+			"type": "default"
+		}
+	]
+}
