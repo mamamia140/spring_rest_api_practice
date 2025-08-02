@@ -16,6 +16,7 @@ import tr.gov.bilgem.restpractice.service.AbstractService;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public abstract class AbstractController<T extends BaseEntity, ID> {
@@ -98,8 +99,7 @@ public abstract class AbstractController<T extends BaseEntity, ID> {
         try{
             entityService.deleteById(id);
             return new ResponseEntity<>(String.format("Entity with id:%s deleted successfully", id),HttpStatus.OK);
-        }
-        catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException | NoSuchElementException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             entityService.getServiceLoggerByEntity().error(e.getMessage());
@@ -113,7 +113,7 @@ public abstract class AbstractController<T extends BaseEntity, ID> {
         try{
             entityService.updateById(id, entity);
             return new ResponseEntity<>(String.format("Entity with id:%s updated successfully", id),HttpStatus.OK);
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException | NoSuchElementException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (DataIntegrityViolationException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

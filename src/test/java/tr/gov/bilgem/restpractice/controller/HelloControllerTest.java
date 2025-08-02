@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for BuildInfoController
+ * Integration tests for HelloController
  *
  * @author Serdar Serpen
  * @date Nov 8, 2023
@@ -29,43 +29,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @Import(TestConfig.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
-class BuildInfoControllerTest {
+class HelloControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @Test
-    void testGetBuildInfo() throws Exception {
-        mvc.perform(get("/api/build-info")
+    void testHelloEndpoint() throws Exception {
+        mvc.perform(get("/api/hello")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").exists());
+                .andExpect(content().string("Hello..."));
     }
 
     @Test
-    void testGetBuildInfoWithDifferentContentType() throws Exception {
-        mvc.perform(get("/api/build-info")
+    void testHelloEndpointWithDifferentContentType() throws Exception {
+        mvc.perform(get("/api/hello")
                 .contentType(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").exists());
+                .andExpect(content().string("Hello..."));
     }
 
     @Test
-    void testGetBuildInfoWithoutContentType() throws Exception {
-        mvc.perform(get("/api/build-info"))
+    void testHelloEndpointWithoutContentType() throws Exception {
+        mvc.perform(get("/api/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").exists());
+                .andExpect(content().string("Hello..."));
     }
-
-    @Test
-    void testGetBuildInfoReturnsValidJson() throws Exception {
-        mvc.perform(get("/api/build-info")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").isNotEmpty());
-    }
-}
+} 
