@@ -2,22 +2,28 @@ package tr.gov.bilgem.restpractice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import tr.gov.bilgem.restpractice.model.User;
-import tr.gov.bilgem.restpractice.user.UserRepository;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final JwtAuthFilter jwtAuthFilter;
+
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -26,33 +32,20 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/build-info").permitAll()
+                        .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/logout").authenticated()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return username -> {
-            User user = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-            return org.springframework.security.core.userdetails.User
-                    .withUsername(user.getUsername())
-                    .password(user.getPassword())
-                    .authorities("USER")
-                    .accountExpired(false)
-                    .accountLocked(false)
-                    .credentialsExpired(false)
-                    .build();
-        };
+        return NoOpPasswordEncoder.getInstance(); // Plaintext (for testing only!)
     }
 
     @Bean
@@ -66,6 +59,11 @@ public class SecurityConfig {
                         .allowCredentials(true);
             }
         };
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
 }
